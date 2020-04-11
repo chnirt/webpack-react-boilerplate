@@ -69,6 +69,8 @@ module.exports = {
         options: {
           emitError: true,
           emitWarning: true,
+          failOnError: true,
+          failOnWarning: true,
           // configFile: './.eslintrc',
         },
       },
