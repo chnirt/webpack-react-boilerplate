@@ -1,0 +1,12 @@
+@font-face {
+	font-family: 'MyFont';
+	src: url('./assets/CutiveMono-Regular.ttf') format('ttf');
+	font-weight: 600;
+	font-style: normal;
+}
+
+.hello {
+	color: blue;
+	font-family: 'MyFont';
+	background: url('./assets/icon.png');
+}
