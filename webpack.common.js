@@ -1,6 +1,7 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = {
 	entry: {
@@ -12,6 +13,9 @@ module.exports = {
 			title: 'Output Management',
 			template: './public/index.html', //source
 			filename: 'index.html',
+		}),
+		new MiniCssExtractPlugin({
+			filename: '[name].css',
 		}),
 	],
 	output: {
@@ -28,6 +32,7 @@ module.exports = {
 		rules: [
 			{
 				test: /\.(js|jsx)$/,
+				include: path.resolve(__dirname, 'src'),
 				exclude: /(node_modules|bower_components)/,
 				use: {
 					loader: 'babel-loader',
@@ -57,5 +62,34 @@ module.exports = {
 				use: ['xml-loader'],
 			},
 		],
+	},
+	optimization: {
+		moduleIds: 'hashed',
+		runtimeChunk: 'single',
+		splitChunks: {
+			chunks: 'async',
+			minSize: 30000,
+			maxSize: 0,
+			minChunks: 1,
+			maxAsyncRequests: 6,
+			maxInitialRequests: 4,
+			automaticNameDelimiter: '~',
+			cacheGroups: {
+				vendor: {
+					test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
+					name: 'vendor',
+					chunks: 'all',
+				},
+				defaultVendors: {
+					test: /[\\/]node_modules[\\/]/,
+					priority: -10,
+				},
+				default: {
+					minChunks: 2,
+					priority: -20,
+					reuseExistingChunk: true,
+				},
+			},
+		},
 	},
 }

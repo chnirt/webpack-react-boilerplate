@@ -1,5 +1,4 @@
 import React from 'react'
-import Icon from './assets/icon.png'
 import Data from './assets/data.xml'
 
 class App extends React.PureComponent {
@@ -7,7 +6,7 @@ class App extends React.PureComponent {
 		console.log(Data)
 		return (
 			<div>
-				<h1 className='hello'>hello1</h1>
+				<h1 className='hello'>hello12345</h1>
 			</div>
 		)
 	}
