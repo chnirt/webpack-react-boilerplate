@@ -4,6 +4,10 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const webpack = require('webpack')
 const ErrorOverlayPlugin = require('error-overlay-webpack-plugin')
+const ManifestPlugin = require('webpack-manifest-plugin')
+const seed = require('./public/manifest.json')
+
+const ASSET_PATH = process.env.ASSET_PATH || '/'
 
 module.exports = {
   entry: {
@@ -14,6 +18,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: 'Output Management',
       template: './public/index.html',
+      favicon: './public/favicon.ico',
       filename: 'index.html'
     }),
     new MiniCssExtractPlugin({
@@ -30,8 +35,15 @@ module.exports = {
       modulesCount: 5000,
       profile: false
     }),
-    new ErrorOverlayPlugin()
-    // new webpack.WatchIgnorePlugin([path.join(__dirname, 'node_modules')])
+    new ErrorOverlayPlugin(),
+    new webpack.DefinePlugin({
+      'process.env.ASSET_PATH': JSON.stringify(ASSET_PATH)
+    }),
+    new ManifestPlugin({
+      fileName: 'manifest.json',
+      writeToFileEmit: true,
+      seed: seed
+    })
   ],
   output: {
     filename: '[name].bundle.js',
@@ -52,8 +64,8 @@ module.exports = {
           emitError: true,
           emitWarning: true,
           failOnError: true,
-          failOnWarning: true
-          // configFile: './.eslintrc',
+          failOnWarning: true,
+          configFile: './.eslintrc.json'
         }
       },
       {
@@ -72,8 +84,15 @@ module.exports = {
         use: ['style-loader', 'css-loader']
       },
       {
-        test: /\.(png|svg|jpg|gif)$/,
-        use: ['file-loader']
+        test: /\.(png|svg|jpg|jpeg|gif|ico)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]'
+            }
+          }
+        ]
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/,

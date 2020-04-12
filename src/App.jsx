@@ -1,34 +1,25 @@
 import React from 'react'
+import logo from './logo.svg'
+import './App.css'
 
 class App extends React.PureComponent {
   render() {
-    const { ...y } = {
-      username: 'Chin',
-      password: '123',
-      gender: 'male'
-    }
-
-    const profile = (
-      <>
-        <h3>zxc</h3>
-      </>
-    )
-
-    console.log('Hello', y)
-
     return (
-      <div>
-        <button
-          id="asd"
-          style={{ width: 200, height: 200 }}
-          onClick={() => {
-            console.log('hgf')
-          }}
-        >
-          Chin12
-        </button>
-        {profile}
-        <h1 className="hello">hello1234</h1>
+      <div className="App">
+        <header className="App-header">
+          <img src={logo} className="App-logo" alt="logo" />
+          <p>
+            Edit <code>src/App.js</code> and save to reload.
+          </p>
+          <a
+            className="App-link"
+            href="https://reactjs.org"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Learn React
+          </a>
+        </header>
       </div>
     )
   }

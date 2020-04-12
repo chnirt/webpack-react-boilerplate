@@ -8,7 +8,7 @@
     "start": "webpack-dev-server --config webpack.dev.js",
     "build": "node_modules/.bin/webpack --config webpack.prod.js",
     "lint": "./node_modules/.bin/eslint src/**/**.jsx",
-    "lint-fix": "./node_modules/.bin/eslint src/**/**.jsx --fix"
+    "format": "./node_modules/.bin/eslint src/**/**.jsx --fix"
   },
   "keywords": [],
   "author": "",
@@ -32,6 +32,7 @@
     "eslint-plugin-prettier": "^3.1.2",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-react": "^7.19.0",
+    "eslint-plugin-react-hooks": "^3.0.0",
     "eslint-plugin-standard": "^4.0.1",
     "file-loader": "^6.0.0",
     "html-webpack-plugin": "^4.2.0",
@@ -41,11 +42,11 @@
     "webpack": "^4.42.1",
     "webpack-cli": "^3.3.11",
     "webpack-dev-server": "^3.10.3",
+    "webpack-manifest-plugin": "^2.2.0",
     "webpack-merge": "^4.2.2",
     "xml-loader": "^1.2.1"
   },
   "dependencies": {
-    "eslint-plugin-react-hooks": "0.0.0-d7382b6c4",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-hot-loader": "^4.12.20"
