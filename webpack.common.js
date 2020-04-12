@@ -4,10 +4,9 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const webpack = require('webpack')
 const ErrorOverlayPlugin = require('error-overlay-webpack-plugin')
-const ManifestPlugin = require('webpack-manifest-plugin')
-const seed = require('./public/manifest.json')
+const CopyPlugin = require('copy-webpack-plugin')
 
-const ASSET_PATH = process.env.ASSET_PATH || '/'
+const ASSET_PATH = process.env.ASSET_PATH || '/dist'
 
 module.exports = {
   entry: {
@@ -39,11 +38,10 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env.ASSET_PATH': JSON.stringify(ASSET_PATH)
     }),
-    new ManifestPlugin({
-      fileName: 'manifest.json',
-      writeToFileEmit: true,
-      seed: seed
-    })
+    new CopyPlugin([
+      { from: 'public/logo192.png', to: '' },
+      { from: 'public/logo512.png', to: '' }
+    ])
   ],
   output: {
     filename: '[name].bundle.js',
