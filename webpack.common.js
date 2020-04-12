@@ -2,20 +2,20 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const webpack = require('webpack')
-var chalk = require('chalk')
-var progress = require('progress')
+// const webpack = require('webpack')
+// var chalk = require('chalk')
+// var progress = require('progress')
 
-var messageTemplate = [':bar', chalk.green(':percent'), ':msg'].join(' ')
-var progressOptions = {
-  complete: chalk.bgGreen(' '),
-  incomplete: chalk.bgWhite(' '),
-  width: 40,
-  total: 100,
-  clear: false,
-}
+// var messageTemplate = [':bar', chalk.green(':percent'), ':msg'].join(' ')
+// var progressOptions = {
+//   complete: chalk.bgGreen(' '),
+//   incomplete: chalk.bgWhite(' '),
+//   width: 40,
+//   total: 100,
+//   clear: false
+// }
 
-var progressBar = new progress(messageTemplate, progressOptions)
+// var progressBar = new progress(messageTemplate, progressOptions)
 
 module.exports = {
   entry: {
@@ -49,15 +49,10 @@ module.exports = {
   output: {
     filename: '[name].bundle.js',
     chunkFilename: '[name].bundle.js',
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'dist')
   },
   resolve: {
-    extensions: ['.js', '.jsx'],
-  },
-  optimization: {
-    splitChunks: {
-      chunks: 'all',
-    },
+    extensions: ['.js', '.jsx']
   },
   module: {
     rules: [
@@ -70,9 +65,9 @@ module.exports = {
           emitError: true,
           emitWarning: true,
           failOnError: true,
-          failOnWarning: true,
+          failOnWarning: true
           // configFile: './.eslintrc',
-        },
+        }
       },
       {
         test: /\.(js|jsx)$/,
@@ -81,31 +76,31 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['@babel/preset-env', '@babel/preset-react'],
-          },
-        },
+            presets: ['@babel/preset-env', '@babel/preset-react']
+          }
+        }
       },
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader'],
+        use: ['style-loader', 'css-loader']
       },
       {
         test: /\.(png|svg|jpg|gif)$/,
-        use: ['file-loader'],
+        use: ['file-loader']
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/,
-        use: ['file-loader'],
+        use: ['file-loader']
       },
       {
         test: /\.(csv|tsv)$/,
-        use: ['csv-loader'],
+        use: ['csv-loader']
       },
       {
         test: /\.xml$/,
-        use: ['xml-loader'],
-      },
-    ],
+        use: ['xml-loader']
+      }
+    ]
   },
   optimization: {
     moduleIds: 'hashed',
@@ -122,18 +117,18 @@ module.exports = {
         vendor: {
           test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
           name: 'vendor',
-          chunks: 'all',
+          chunks: 'all'
         },
         defaultVendors: {
           test: /[\\/]node_modules[\\/]/,
-          priority: -10,
+          priority: -10
         },
         default: {
           minChunks: 2,
           priority: -20,
-          reuseExistingChunk: true,
-        },
-      },
-    },
-  },
+          reuseExistingChunk: true
+        }
+      }
+    }
+  }
 }

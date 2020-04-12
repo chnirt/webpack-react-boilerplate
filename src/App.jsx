@@ -5,7 +5,7 @@ class App extends React.PureComponent {
     const { ...y } = {
       username: 'Chin',
       password: '123',
-      gender: 'male',
+      gender: 'male'
     }
 
     const profile = (
@@ -17,6 +17,15 @@ class App extends React.PureComponent {
     console.log('Hello', y)
     return (
       <div>
+        <button
+          id="asd"
+          style={{ width: 200, height: 200 }}
+          onClick={() => {
+            console.log('hgf')
+          }}
+        >
+          Chin
+        </button>
         {profile}
         <h1 className="hello">hello1234</h1>
       </div>
