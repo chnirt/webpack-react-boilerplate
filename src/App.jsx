@@ -15,6 +15,7 @@ class App extends React.PureComponent {
     )
 
     console.log('Hello', y)
+
     return (
       <div>
         <button
@@ -24,7 +25,7 @@ class App extends React.PureComponent {
             console.log('hgf')
           }}
         >
-          Chin
+          Chin12
         </button>
         {profile}
         <h1 className="hello">hello1234</h1>

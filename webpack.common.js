@@ -2,49 +2,36 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-// const webpack = require('webpack')
-// var chalk = require('chalk')
-// var progress = require('progress')
-
-// var messageTemplate = [':bar', chalk.green(':percent'), ':msg'].join(' ')
-// var progressOptions = {
-//   complete: chalk.bgGreen(' '),
-//   incomplete: chalk.bgWhite(' '),
-//   width: 40,
-//   total: 100,
-//   clear: false
-// }
-
-// var progressBar = new progress(messageTemplate, progressOptions)
+const webpack = require('webpack')
+const ErrorOverlayPlugin = require('error-overlay-webpack-plugin')
 
 module.exports = {
   entry: {
-    app: './src/index.jsx',
+    app: './src/index.jsx'
   },
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       title: 'Output Management',
-      template: './public/index.html', //source
-      filename: 'index.html',
+      template: './public/index.html',
+      filename: 'index.html'
     }),
     new MiniCssExtractPlugin({
-      filename: '[name].css',
+      filename: '[name].css'
     }),
-    // new webpack.ProgressPlugin({
-    // 	activeModules: false,
-    // 	entries: true,
-    // 	handler(percentage, message, ...args) {
-    // 		// custom logic
-    // 		progressBar.update(percentage, { msg: message })
-    // 	},
-    // 	modules: true,
-    // 	modulesCount: 5000,
-    // 	profile: false,
-    // 	// dependencies: true,
-    // 	// dependenciesCount: 10000,
-    // 	// percentBy: null,
-    // }),
+    new webpack.ProgressPlugin({
+      activeModules: false,
+      entries: true,
+      handler(percentage, message, ...args) {
+        // custom logic
+        console.info(percentage, message, ...args)
+      },
+      modules: true,
+      modulesCount: 5000,
+      profile: false
+    }),
+    new ErrorOverlayPlugin()
+    // new webpack.WatchIgnorePlugin([path.join(__dirname, 'node_modules')])
   ],
   output: {
     filename: '[name].bundle.js',
