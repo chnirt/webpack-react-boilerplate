@@ -26,7 +26,7 @@
   npm i
 ```
 
-4 Start
+4. Start
 
 ```
   PORT=<yourport> npm run start
